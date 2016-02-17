@@ -52,10 +52,23 @@ angular.module('starter', ['ionic', 'firebase'])
         var itemupdate = new Firebase('https://testappcordova.firebaseio.com/items/'+itemID);
         itemupdate.update({ status: '1', updated_at: todays_date});
         $scope.item = item;
-        $scope.item['status'] = 'purchased';
-        //alert(itemID);
+        $scope.item['status'] = '1';
+        $ionicListDelegate.closeOptionButtons();
         
-        //itemupdate.save(itemID);  
+    }
+    $scope.undopurchaseItem = function(item,itemID){
+        //date function
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+        var todays_date = dd+'-'+mm+'-'+yyyy+' '+time;
+        //date function
+        var itemupdate = new Firebase('https://testappcordova.firebaseio.com/items/'+itemID);
+        itemupdate.update({ status: '0', updated_at: todays_date});
+        $scope.item = item;
+        $scope.item['status'] = '0';
         $ionicListDelegate.closeOptionButtons();
         
     }
