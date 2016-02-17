@@ -24,23 +24,39 @@ angular.module('starter', ['ionic', 'firebase'])
         if (name){
             $scope.items.$add({
                'name' : name, 
-               'created_at' : todays_date
+               'status' : 0, 
+               'created_at' : todays_date,
+               'updated_at' : todays_date
             });
         }
     };
     //delete method start
     $scope.removeItem = function(itemID) {
-        var deleteitem = confirm('Are you absolutely sure you want to delete?');
-        if (deleteitem) {
+        //var deleteitem = prompt('Are you absolutely sure you want to delete?');
+        //if (deleteitem) {
             //$http.delete('https://testappcordova.firebaseio.com/items/-KAkdVe4E68DU7ik3ffK');
             var item = new Firebase('https://testappcordova.firebaseio.com/items/'+itemID);
             item.remove();  
-        }
+        //}
     }
     //delete method end
-    $scope.purchaseItem = function(item){
+    $scope.purchaseItem = function(item,itemID){
+        //date function
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+        var todays_date = dd+'-'+mm+'-'+yyyy+' '+time;
+        //date function
+        var itemupdate = new Firebase('https://testappcordova.firebaseio.com/items/'+itemID);
+        itemupdate.update({ status: '1', updated_at: todays_date});
         $scope.item = item;
         $scope.item['status'] = 'purchased';
+        //alert(itemID);
+        
+        //itemupdate.save(itemID);  
         $ionicListDelegate.closeOptionButtons();
+        
     }
 });
