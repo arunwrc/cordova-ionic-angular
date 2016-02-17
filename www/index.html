@@ -36,6 +36,12 @@
       <ion-list>
         <ion-item ng-repeat="item in items" class="item-icon-left" ng-class="{purchased: item.status == '1'}">
           {{$index+1}}) {{item.name}} 
+            <span ng-show ="item.status=='0'">
+            <div>
+                <button ng-click="count = count+1" ng-init="count=1">+</button>
+                <button ng-show="count>0" ng-click="count = count - 1">-</button> {{count}}
+            </div>    
+            </span> 
         <span class="item-note">
           {{item.created_at}}
         </span>

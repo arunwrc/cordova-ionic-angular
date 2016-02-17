@@ -30,6 +30,9 @@ angular.module('starter', ['ionic', 'firebase'])
             });
         }
     };
+    $scope.increment = function(item){
+        item.count += 1;
+    }
     //delete method start
     $scope.removeItem = function(itemID) {
         //var deleteitem = prompt('Are you absolutely sure you want to delete?');
@@ -53,8 +56,7 @@ angular.module('starter', ['ionic', 'firebase'])
         itemupdate.update({ status: '1', updated_at: todays_date});
         $scope.item = item;
         $scope.item['status'] = '1';
-        $ionicListDelegate.closeOptionButtons();
-        
+        $ionicListDelegate.closeOptionButtons();    
     }
     $scope.undopurchaseItem = function(item,itemID){
         //date function
@@ -69,7 +71,6 @@ angular.module('starter', ['ionic', 'firebase'])
         itemupdate.update({ status: '0', updated_at: todays_date});
         $scope.item = item;
         $scope.item['status'] = '0';
-        $ionicListDelegate.closeOptionButtons();
-        
+        $ionicListDelegate.closeOptionButtons();       
     }
 });
